@@ -2,6 +2,8 @@
 
 > My majestic Nuxt.js project
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/048d01f4-e981-4477-ab04-48600978172d/deploy-status)](https://app.netlify.com/sites/blissful-payne-0e600b/deploys)
+
 ## Build Setup
 
 ``` bash

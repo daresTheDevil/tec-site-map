@@ -7,11 +7,6 @@
       <div class="w-full flex flex-wrap items-center justify-between mt-0 px-8">
         <div class="flex items-center">
           <img src="tec-logo.svg" class="w-20 mr-4" />
-          <!-- <h1
-            class="text-3xl text-gray-100 no-underline font-medium tracking-tight hidden md:flex"
-          >
-            Unfulfilled Requests
-          </h1> -->
         </div>
 
         <div class="flex">

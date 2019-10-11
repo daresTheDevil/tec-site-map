@@ -62,47 +62,6 @@
             </l-polyline>
           </template>
           <l-marker-cluster>
-            <!-- <l-marker
-              v-for="(marker, index) in addedMarkers"
-              :key="index"
-              :lat-lng="marker"
-              @click.stop="removeMarker(index)"
-            ></l-marker> -->
-            <!-- <template v-if="showRequests">
-              <l-marker
-                v-for="(marker, i) in markers"
-                :key="i"
-                :lat-lng="[
-                  marker.geometry.location.lat,
-                  marker.geometry.location.lng
-                ]"
-              >
-                <l-popup class="min-w-32">
-                  <h1 class="text-sm text-gray-600">Address:</h1>
-                  <h1
-                    v-if="marker.Address.Street"
-                    class="text-base font-medium text-gray-800"
-                  >
-                    {{ marker.Address.HouseNumber }} {{ marker.Address.Street }}
-                  </h1>
-                  <h1 v-else class="text-base font-medium text-red-700">
-                    Check Address
-                  </h1>
-                  <h1
-                    v-if="marker.Address.Street"
-                    class="text-sm font-medium text-gray-800"
-                  >
-                    {{ marker.Address.City }}, {{ marker.Address.State }}
-                    {{ marker.Address.PostalCode }}
-                  </h1>
-                  <h1 class="text-sm text-gray-600 mt-2">County:</h1>
-                  <h1 class="text-base font-medium text-gray-800">
-                    {{ marker.Address.County }} County
-                  </h1>
-                </l-popup>
-              </l-marker>
-            </template> -->
-
             <l-marker
               v-for="(marker, i) in dataMarkers"
               :key="i"
@@ -132,7 +91,7 @@
           <div class="flex z-9999 m-4 top-0 left-0 h-auto overflow-y-auto">
             <div
               v-if="uncodedMarkers.length > 0"
-              class="flex bg-gray-100 rounded-lg shadow-lg"
+              class="flex bg-gray-100 rounded-lg shadow-lg border-2"
             >
               <div class="px-6 py-4 flex flex-col">
                 <div class="font-bold text-xl mb-2 flex items-center">
@@ -571,9 +530,11 @@ export default {
       // const markers = JSON.parse(this.doc)
       console.log('results', results)
 
+      this.$nuxt.$loading.start()
       for (let i = 0; i < results.length; i++) {
         this.getMarker(results[i])
       }
+      this.$nuxt.$loading.finish()
 
       /* this.dataMarkers.forEach((item) => {
         this.getMarker(item)

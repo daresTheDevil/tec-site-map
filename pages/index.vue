@@ -131,8 +131,8 @@
           </l-marker-cluster>
           <div class="flex z-9999 m-4 top-0 left-0 h-auto overflow-y-auto">
             <div
-              class="flex bg-gray-100 rounded-lg shadow-lg h-full"
               v-if="uncodedMarkers.length > 0"
+              class="flex bg-gray-100 rounded-lg shadow-lg"
             >
               <div class="px-6 py-4 flex flex-col">
                 <div class="font-bold text-xl mb-2 flex items-center">
@@ -147,6 +147,9 @@
                   <li v-for="(item, k) in uncodedMarkers" :key="k">
                     <p class="text-xs text-gray-700">
                       {{ item }}
+                      <!-- {{ item.str.split(',')[0] }}<br />
+                      {{ item.str.split(',')[1] }}, -->
+                      <!-- {{ item.str.split(',')[2] }} {{ item.str.split(',')[3] }} -->
                     </p>
                   </li>
                 </ul>

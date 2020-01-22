@@ -92,21 +92,18 @@
                 <div class="flex items-center mb-2 text-xl font-bold">
                   <span class="mr-2">Unrecognized Addresses:</span>
                   <div
-                    class="flex items-center justify-center w-8 h-8 text-lg text-red-100 bg-red-600 rounded-full"
+                    class="flex items-center justify-center px-4 py-2 text-lg text-red-100 bg-red-600 rounded-full"
                   >
                     {{ uncodedMarkers.length }}
                   </div>
                 </div>
-                <ul class="flex flex-col my-4 overflow-y-auto">
+                <!-- <ul class="flex flex-col my-4 overflow-y-auto">
                   <li v-for="(item, k) in uncodedMarkers" :key="k">
                     <p class="text-xs text-gray-700">
                       {{ item }}
-                      <!-- {{ item.str.split(',')[0] }}<br />
-                      {{ item.str.split(',')[1] }}, -->
-                      <!-- {{ item.str.split(',')[2] }} {{ item.str.split(',')[3] }} -->
                     </p>
                   </li>
-                </ul>
+                </ul> -->
                 <!-- <div class="flex items-center mb-2">
                   <div
                     :class="showGeojson ? 'bg-green-600' : 'bg-red-600'"

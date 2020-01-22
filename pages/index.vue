@@ -83,80 +83,22 @@
               </l-popup>
             </l-marker>
           </l-marker-cluster>
-          <div class="top-0 left-0 max-h-screen m-4 overflow-y-auto z-9999">
+          <div class="top-0 left-0 flex m-4 z-9999">
             <div
               v-if="uncodedMarkers.length > 0"
-              class="flex bg-gray-100 border-2 rounded-lg shadow-lg"
+              class="flex items-center h-12 px-4 py-2 bg-gray-100 border-2 rounded-lg shadow-lg"
             >
-              <div class="flex flex-col px-6 py-4">
-                <div class="flex items-center mb-2 text-xl font-bold">
-                  <span class="mr-2">Unrecognized Addresses:</span>
-                  <div
-                    class="flex items-center justify-center px-4 py-2 text-lg text-red-100 bg-red-600 rounded-full"
-                  >
-                    {{ uncodedMarkers.length }}
-                  </div>
-                </div>
-                <!-- <ul class="flex flex-col my-4 overflow-y-auto">
-                  <li v-for="(item, k) in uncodedMarkers" :key="k">
-                    <p class="text-xs text-gray-700">
-                      {{ item }}
-                    </p>
-                  </li>
-                </ul> -->
-                <!-- <div class="flex items-center mb-2">
-                  <div
-                    :class="showGeojson ? 'bg-green-600' : 'bg-red-600'"
-                    class="inline-block w-12 h-6 mr-4 rounded-full shadow cursor-pointer"
-                    @click.stop="showGeojson = !showGeojson"
-                  >
-                    <div
-                      :style="{
-                        transform: `translateX(${showGeojson ? 100 : 0}%)`
-                      }"
-                      class="w-1/2 h-full rounded-full shadow"
-                      :class="showGeojson ? 'bg-green-200' : 'bg-red-200'"
-                    />
-                  </div>
-                  <span class="text-base leading-none">Counties</span>
-                </div>
-                <div class="flex items-center mb-2">
-                  <div
-                    :class="showRequests ? 'bg-green-600' : 'bg-red-500'"
-                    class="inline-block w-12 h-6 mr-4 rounded-full shadow cursor-pointer"
-                    @click.stop="showRequests = !showRequests"
-                  >
-                    <div
-                      :style="{
-                        transform: `translateX(${showRequests ? 100 : 0}%)`
-                      }"
-                      class="w-1/2 h-full rounded-full shadow"
-                      :class="showRequests ? 'bg-green-200' : 'bg-red-200'"
-                    />
-                  </div>
-                  <span class="text-base leading-none"
-                    >Unfulfilled Requests</span
-                  >
-                </div>
-                <div class="flex items-center mb-2">
-                  <div
-                    :class="showFiber ? 'bg-green-600' : 'bg-red-600'"
-                    class="inline-block w-12 h-6 mr-4 overflow-visible rounded-full shadow cursor-pointer"
-                    @click.stop="showFiber = !showFiber"
-                  >
-                    <div
-                      :style="{
-                        transform: `translateX(${showFiber ? 100 : 0}%)`
-                      }"
-                      class="w-1/2 h-full rounded-full shadow-md"
-                      :class="showFiber ? 'bg-green-200' : 'bg-red-200'"
-                    />
-                  </div>
-                  <span class="text-base leading-none">Fiber Runs</span>
-                </div> -->
+              <h1 class="mr-2 text-lg font-bold text-gray-700">
+                Unrecognized Addresses:
+              </h1>
+              <div
+                class="flex items-center justify-center px-2 py-1 text-lg text-red-100 bg-red-600 rounded-full"
+              >
+                {{ uncodedMarkers.length }}
               </div>
             </div>
           </div>
+
           <div class="absolute top-0 right-0 flex flex-col m-4 z-9999">
             <button
               class="flex items-center justify-center w-12 h-12 bg-purple-900 border-b-2 border-purple-500 rounded-t-lg shadow-lg active:bg-purple-800 active:shadow-none"

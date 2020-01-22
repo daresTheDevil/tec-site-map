@@ -1,20 +1,20 @@
 <template>
-  <div class="min-h-screen w-full flex flex-col fixed">
+  <div class="fixed flex flex-col w-full min-h-screen">
     <nav
       id="header"
-      class="w-full z-30 top-0 text-gray-800 bg-purple-900 py-3 shadow-md"
+      class="top-0 z-30 w-full py-3 text-gray-800 bg-purple-900 shadow-md"
     >
-      <div class="w-full flex flex-wrap items-center justify-between mt-0 px-8">
+      <div class="flex flex-wrap items-center justify-between w-full px-8 mt-0">
         <div class="flex items-center">
           <img src="tec-logo.svg" class="w-20 mr-4" />
         </div>
 
         <div class="flex">
           <button
-            class="border-purple-100 border-2 hover:bg-purple-200 text-gray-100 font-bold py-2 px-4 rounded-lg inline-flex items-center hover:text-purple-800 hover:border-purple-800"
+            class="inline-flex items-center px-4 py-2 font-bold text-gray-100 border-2 border-purple-100 rounded-lg hover:bg-purple-200 hover:text-purple-800 hover:border-purple-800"
             @click.stop="addFiles"
           >
-            <svg class="fill-current w-6 h-6 mr-2" viewBox="0 0 24 24">
+            <svg class="w-6 h-6 mr-2 fill-current" viewBox="0 0 24 24">
               <path
                 d="M14,13V17H10V13H7L12,8L17,13M19.35,10.03C18.67,6.59 15.64,4 12,4C9.11,4 6.6,5.64 5.35,8.03C2.34,8.36 0,10.9 0,14A6,6 0 0,0 6,20H19A5,5 0 0,0 24,15C24,12.36 21.95,10.22 19.35,10.03Z"
               />
@@ -25,9 +25,9 @@
         </div>
       </div>
 
-      <!-- <hr class="border-b border-gray-100 opacity-25 my-0 py-0" /> -->
+      <!-- <hr class="py-0 my-0 border-b border-gray-100 opacity-25" /> -->
     </nav>
-    <div class="flex-grow flex flex-col bg-green-200">
+    <div class="flex flex-col flex-grow bg-green-200">
       <no-ssr>
         <l-map
           ref="tecMap"
@@ -38,7 +38,7 @@
           @click="addMarker"
         >
           <l-tile-layer
-            url="http://{s}.tile.osm.org/{z}/{x}/{y}.png"
+            url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}"
           ></l-tile-layer>
           <l-geo-json
             v-if="showGeojson"
@@ -83,16 +83,16 @@
               </l-popup>
             </l-marker>
           </l-marker-cluster>
-          <div class="flex z-9999 m-4 top-0 left-0 h-auto overflow-y-auto">
+          <div class="top-0 left-0 flex h-auto m-4 overflow-y-auto z-9999">
             <div
               v-if="uncodedMarkers.length > 0"
-              class="flex bg-gray-100 rounded-lg shadow-lg border-2"
+              class="flex bg-gray-100 border-2 rounded-lg shadow-lg"
             >
-              <div class="px-6 py-4 flex flex-col">
-                <div class="font-bold text-xl mb-2 flex items-center">
+              <div class="flex flex-col px-6 py-4">
+                <div class="flex items-center mb-2 text-xl font-bold">
                   <span class="mr-2">Unrecognized Addresses:</span>
                   <div
-                    class="rounded-full h-8 w-8 flex items-center justify-center bg-red-600 text-red-100 text-lg"
+                    class="flex items-center justify-center w-8 h-8 text-lg text-red-100 bg-red-600 rounded-full"
                   >
                     {{ uncodedMarkers.length }}
                   </div>
@@ -110,7 +110,7 @@
                 <!-- <div class="flex items-center mb-2">
                   <div
                     :class="showGeojson ? 'bg-green-600' : 'bg-red-600'"
-                    class="w-12 h-6 rounded-full shadow inline-block cursor-pointer mr-4"
+                    class="inline-block w-12 h-6 mr-4 rounded-full shadow cursor-pointer"
                     @click.stop="showGeojson = !showGeojson"
                   >
                     <div
@@ -126,7 +126,7 @@
                 <div class="flex items-center mb-2">
                   <div
                     :class="showRequests ? 'bg-green-600' : 'bg-red-500'"
-                    class="w-12 h-6 rounded-full shadow inline-block cursor-pointer mr-4"
+                    class="inline-block w-12 h-6 mr-4 rounded-full shadow cursor-pointer"
                     @click.stop="showRequests = !showRequests"
                   >
                     <div
@@ -144,7 +144,7 @@
                 <div class="flex items-center mb-2">
                   <div
                     :class="showFiber ? 'bg-green-600' : 'bg-red-600'"
-                    class="w-12 h-6 rounded-full shadow inline-block cursor-pointer mr-4 overflow-visible"
+                    class="inline-block w-12 h-6 mr-4 overflow-visible rounded-full shadow cursor-pointer"
                     @click.stop="showFiber = !showFiber"
                   >
                     <div
@@ -160,13 +160,13 @@
               </div>
             </div>
           </div>
-          <div class="flex flex-col absolute z-9999 m-4 top-0 right-0">
+          <div class="absolute top-0 right-0 flex flex-col m-4 z-9999">
             <button
-              class="h-12 w-12 rounded-t-lg border-b-2 border-purple-500 bg-purple-900 shadow-lg active:bg-purple-800 flex items-center justify-center active:shadow-none"
+              class="flex items-center justify-center w-12 h-12 bg-purple-900 border-b-2 border-purple-500 rounded-t-lg shadow-lg active:bg-purple-800 active:shadow-none"
               @click.stop="resetMap"
             >
               <svg
-                class="h-8 w-8 text-gray-100 fill-current"
+                class="w-8 h-8 text-gray-100 fill-current"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -175,10 +175,10 @@
               </svg>
             </button>
             <button
-              class="h-12 w-12 bg-purple-900 shadow-lg active:bg-purple-800 flex items-center justify-center active:shadow-none"
+              class="flex items-center justify-center w-12 h-12 bg-purple-900 shadow-lg active:bg-purple-800 active:shadow-none"
             >
               <svg
-                class="h-8 w-8 text-gray-100 fill-current"
+                class="w-8 h-8 text-gray-100 fill-current"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -187,7 +187,7 @@
               </svg>
             </button>
             <button
-              class="h-12 w-12 shadow-lg flex items-center justify-center active:shadow-none"
+              class="flex items-center justify-center w-12 h-12 shadow-lg active:shadow-none"
               :class="
                 showGeojson
                   ? 'bg-green-600 active:bg-green-500'
@@ -196,7 +196,7 @@
               @click.stop="showGeojson = !showGeojson"
             >
               <svg
-                class="h-8 w-8 text-gray-100 fill-current"
+                class="w-8 h-8 text-gray-100 fill-current"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -205,7 +205,7 @@
               </svg>
             </button>
             <button
-              class="h-12 w-12 rounded-b-lg shadow-lg flex items-center justify-center active:shadow-none"
+              class="flex items-center justify-center w-12 h-12 rounded-b-lg shadow-lg active:shadow-none"
               :class="
                 editMap
                   ? 'bg-green-600 active:bg-green-500'
@@ -214,7 +214,7 @@
               @click.stop="editMap = !editMap"
             >
               <svg
-                class="h-8 w-8 text-gray-100 fill-current"
+                class="w-8 h-8 text-gray-100 fill-current"
                 viewBox="0 0 24 24"
               >
                 <path
@@ -239,7 +239,8 @@
 <script>
 // import JsZip from 'jszip'
 import axios from 'axios'
-import Papa from 'papaparse'
+// import Papa from 'papaparse'
+import XLSX from 'xlsx'
 import rateLimit from 'axios-rate-limit'
 // import { mapGetters } from 'vuex'
 import 'leaflet/dist/leaflet.css'
@@ -473,13 +474,8 @@ export default {
       // const apiPath = 'https://api.geocod.io/v1.4/geocode?street=1109+N+Highland+St&city=Arlington&state=VA&api_key=107da54c1576781cd0c6a6d0a55ca8548aed54a'
 
       const searchAddress =
-        address.address +
-        ',' +
-        address.city +
-        ',' +
-        address.state +
-        ',' +
-        address.zip
+        address[1] + ',' + address[2] + ',' + address[3] + ',' + address[4]
+      console.log('searchaddress', searchAddress)
 
       const params = {
         key: process.env.mapApiKey,
@@ -491,7 +487,7 @@ export default {
       const http = rateLimit(axios.create(), { maxRequests: 50, maxRPS: 1 })
 
       http.get(apiPath, { params }).then((response) => {
-        // console.log('geocodeio response', response.data)
+        console.log('geocodeio response', response.data)
         if (response.data.results.length > 0) {
           const results = response.data.results[0]
           console.log('response.data.results', results)
@@ -503,23 +499,43 @@ export default {
       })
     },
     upload(e) {
-      const that = this
+      // const that = this
       const fileToLoad = event.target.files[0]
       const reader = new FileReader()
-      reader.onload = (fileLoadedEvent) => {
-        Papa.parse(fileLoadedEvent.target.result, {
-          header: true,
-          dynamicTyping: true,
-          skipEmptyLines: true,
-          complete(results) {
-            console.log('papaparse results', results)
-            // that.$store.commit('SET_MARKERS', results.data)
-            that.handleMarkers(results.data)
-          },
-          error(errors) {}
-        })
+      reader.onload = (e) => {
+        const bstr = e.target.result
+        const wb = XLSX.read(bstr, { type: 'binary' })
+        const wsname = wb.SheetNames[0]
+        const ws = wb.Sheets[wsname]
+        const data = XLSX.utils.sheet_to_json(ws, { header: 1 })
+        this.handleMarkers(data)
+        console.log('data load', data)
+        this.data = data
+        // this.cols = make_cols(ws['!ref'])
       }
-      reader.readAsText(fileToLoad)
+      reader.readAsBinaryString(fileToLoad)
+      /* reader.onload = (fileLoadedEvent) => {
+        const file = fileLoadedEvent.target.result
+        if (file.type === 'text/csv') {
+          Papa.parse(file, {
+            header: true,
+            dynamicTyping: true,
+            skipEmptyLines: true,
+            complete(results) {
+              console.log('papaparse results', results)
+              that.handleMarkers(results.data)
+            },
+            error(errors) {}
+          })
+        } else if (
+          file.type ===
+          'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        ) {
+          const workbook = XLSX.readFile(file)
+          console.log('workbook', workbook)
+        }
+      }
+      reader.readAsText(fileToLoad) */
     },
     handleMarkers(results) {
       // const markers = JSON.parse(this.doc)
@@ -527,6 +543,7 @@ export default {
 
       this.$nuxt.$loading.start()
       for (let i = 0; i < results.length; i++) {
+        // console.log('result loop', results[i])
         this.getMarker(results[i])
       }
       this.$nuxt.$loading.finish()
@@ -569,6 +586,7 @@ export default {
     },
     addFiles() {
       // called when file upload is clicked
+      console.log('addfiles called')
       this.$refs.files.click()
     },
     handleDragDropUpload(e) {
@@ -579,12 +597,12 @@ export default {
       }
     },
     onFilesAdded() {
-      // const uploadedFiles = this.$refs.files.files
+      const uploadedFiles = this.$refs.files.files
       // add files to array
-      // for (let i = 0; i < uploadedFiles.length; i++) {
-      //   const file = uploadedFiles[i]
-      //   this.files.push(file)
-      // }
+      for (let i = 0; i < uploadedFiles.length; i++) {
+        const file = uploadedFiles[i]
+        this.files.push(file)
+      }
     }
   }
 }

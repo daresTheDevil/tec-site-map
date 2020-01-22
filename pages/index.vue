@@ -83,7 +83,7 @@
               </l-popup>
             </l-marker>
           </l-marker-cluster>
-          <div class="top-0 left-0 flex h-auto m-4 overflow-y-auto z-9999">
+          <div class="top-0 left-0 max-h-screen m-4 overflow-y-auto z-9999">
             <div
               v-if="uncodedMarkers.length > 0"
               class="flex bg-gray-100 border-2 rounded-lg shadow-lg"
@@ -237,12 +237,10 @@
 </template>
 
 <script>
-// import JsZip from 'jszip'
 import axios from 'axios'
 // import Papa from 'papaparse'
 import XLSX from 'xlsx'
 import rateLimit from 'axios-rate-limit'
-// import { mapGetters } from 'vuex'
 import 'leaflet/dist/leaflet.css'
 import Vue2LeafletMarkerCluster from 'vue2-leaflet-markercluster'
 import 'leaflet.markercluster/dist/MarkerCluster.Default.css'

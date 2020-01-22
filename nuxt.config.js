@@ -32,7 +32,10 @@ export default {
   /*
    ** Customize the progress-bar color
    */
-  loading: { color: '#f37124', height: '15px' },
+  loading: {
+    color: 'blue',
+    height: '5px'
+  },
   /*
    ** Global CSS
    */
@@ -40,7 +43,7 @@ export default {
   /*
    ** Plugins to load before mounting the App
    */
-  plugins: [{ src: '~/plugins/leaflet-cluster.js', mode: 'client' }],
+  plugins: [{ src: '@/plugins/leaflet-cluster.js', mode: 'client' }],
   /*
    ** Nuxt.js dev-modules
    */

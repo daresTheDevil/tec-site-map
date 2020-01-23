@@ -23,9 +23,7 @@
             />
           </div>
           <div class="ml-4">
-            <h1 class="text-lg text-gray-100">
-              {{ codedProgress + uncodedProgress }}%
-            </h1>
+            <h1 class="text-lg text-gray-100">{{ progress }}%</h1>
           </div>
         </div>
 
@@ -371,7 +369,11 @@ export default {
     progress() {
       // const current = this.addedMarkers.length / this.dataLength
       // console.log('current', current)
-      return Math.trunc((this.dataMarkers.length / this.dataLength) * 100)
+      return Math.trunc(
+        ((this.dataMarkers.length + this.uncodedMarkers.length) /
+          this.dataLength) *
+          100
+      )
     },
     styleFunction() {
       // const fillColor = this.fillColor // important! need touch fillColor in computed for re-calculate when change fillColor

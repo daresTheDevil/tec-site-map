@@ -9,6 +9,26 @@
           <img src="tec-logo.svg" class="w-20 mr-4" />
         </div>
 
+        <div class="flex items-center" v-if="loading">
+          <div
+            class="flex w-64 h-10 overflow-hidden bg-purple-800 rounded-full"
+          >
+            <div
+              class="flex h-full bg-teal-300"
+              :style="`width: ${codedProgress}%`"
+            />
+            <div
+              class="flex h-full bg-yellow-300"
+              :style="`width: ${uncodedProgress}%`"
+            />
+          </div>
+          <div class="ml-4">
+            <h1 class="text-lg text-gray-100">
+              {{ codedProgress + uncodedProgress }}
+            </h1>
+          </div>
+        </div>
+
         <div class="flex items-center">
           <div
             class="px-4 py-2 mr-4 text-gray-800 bg-teal-300 rounded-full"
@@ -329,14 +349,29 @@ export default {
       staticAnchor: [60, 30],
       dragging: false,
       clipped: false,
+      loading: false,
       drawer: false,
       fixed: false,
       map: null,
       title: 'Impressions Map',
-      addedMarkers: []
+      addedMarkers: [],
+      dataLength: 0
     }
   },
   computed: {
+    codedProgress() {
+      if (this.dataLength === 0) return 0
+      else return (this.dataMarkers.length / this.dataLength) * 100
+    },
+    uncodedProgress() {
+      if (this.dataLength === 0) return 0
+      else return (this.uncodedMarkers.length / this.dataLength) * 100
+    },
+    progress() {
+      // const current = this.addedMarkers.length / this.dataLength
+      // console.log('current', current)
+      return (this.dataMarkers.length / this.dataLength) * 100
+    },
     styleFunction() {
       // const fillColor = this.fillColor // important! need touch fillColor in computed for re-calculate when change fillColor
       return () => {
@@ -449,7 +484,7 @@ export default {
 
       const apiPath = 'https://maps.googleapis.com/maps/api/geocode/json'
 
-      const http = rateLimit(axios.create(), { maxRequests: 50, maxRPS: 1 })
+      const http = rateLimit(axios.create(), { maxRPS: 50 })
 
       http.get(apiPath, { params }).then((response) => {
         console.log('geocodeio response', response.data)
@@ -473,10 +508,9 @@ export default {
         const wsname = wb.SheetNames[0]
         const ws = wb.Sheets[wsname]
         const data = XLSX.utils.sheet_to_json(ws, { header: 1 })
+        this.loading = true
         this.handleMarkers(data)
         // this.handleMarkers(data)
-        console.log('data load', data)
-        this.data = data
         // this.cols = make_cols(ws['!ref'])
       }
       reader.readAsBinaryString(fileToLoad)
@@ -506,6 +540,8 @@ export default {
     handleMarkers(results) {
       // const markers = JSON.parse(this.doc)
       console.log('results', results)
+
+      this.dataLength = results.length
 
       this.$nuxt.$loading.start()
       for (let i = 0; i < results.length; i++) {

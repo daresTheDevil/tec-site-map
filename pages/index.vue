@@ -9,7 +9,19 @@
           <img src="tec-logo.svg" class="w-20 mr-4" />
         </div>
 
-        <div class="flex">
+        <div class="flex items-center">
+          <div
+            class="px-4 py-2 mr-4 text-gray-800 bg-teal-300 rounded-full"
+            v-if="dataMarkers.length > 0"
+          >
+            Coded: {{ dataMarkers.length }}
+          </div>
+          <div
+            class="px-4 py-2 mr-4 text-gray-800 bg-yellow-300 rounded-full"
+            v-if="uncodedMarkers.length > 0"
+          >
+            Uncoded: {{ uncodedMarkers.length }}
+          </div>
           <button
             class="inline-flex items-center px-4 py-2 font-bold text-gray-100 border-2 border-purple-100 rounded-lg hover:bg-purple-200 hover:text-purple-800 hover:border-purple-800"
             @click.stop="addFiles"
@@ -83,7 +95,7 @@
               </l-popup>
             </l-marker>
           </l-marker-cluster>
-          <div class="top-0 left-0 flex m-4 z-9999">
+          <!-- <div class="top-0 left-0 flex m-4 z-9999">
             <div
               v-if="uncodedMarkers.length > 0"
               class="flex items-center h-12 px-4 py-2 bg-gray-100 border-2 rounded-lg shadow-lg"
@@ -97,7 +109,7 @@
                 {{ uncodedMarkers.length }}
               </div>
             </div>
-          </div>
+          </div> -->
 
           <div class="absolute top-0 right-0 flex flex-col m-4 z-9999">
             <button
@@ -405,11 +417,27 @@ export default {
     resetMap() {
       this.$refs.tecMap.mapObject.setView(this.originalCenter, this.zoom)
     },
-    getMarker(address) {
-      // const apiPath = 'https://nominatim.openstreetmap.org/search.php'
-      // const apiPath = 'https://geocoder.api.here.com/6.2/geocode.json'
-      // const apiPath = 'https://api.geocod.io/v1.4/geocode?street=1109+N+Highland+St&city=Arlington&state=VA&api_key=107da54c1576781cd0c6a6d0a55ca8548aed54a'
+    getGeo(address) {
+      console.log('address', address)
+      /* const searchAddress =
+        address[1] + ',' + address[2] + ',' + address[3] + ',' + address[4] */
 
+      const apiPath =
+        'https://geocoding.geo.census.gov/geocoder/locations/address?street=' +
+        address[1] +
+        '&city=' +
+        address[2] +
+        '&state=' +
+        address[3] +
+        '&zip=' +
+        address[4] +
+        '&benchmark=Public_AR_Current&format=json'
+
+      axios
+        .get(apiPath, { crossdomain: true })
+        .then((response) => console.log('census response', response))
+    },
+    getMarker(address) {
       const searchAddress =
         address[1] + ',' + address[2] + ',' + address[3] + ',' + address[4]
       console.log('searchaddress', searchAddress)
@@ -446,6 +474,7 @@ export default {
         const ws = wb.Sheets[wsname]
         const data = XLSX.utils.sheet_to_json(ws, { header: 1 })
         this.handleMarkers(data)
+        // this.handleMarkers(data)
         console.log('data load', data)
         this.data = data
         // this.cols = make_cols(ws['!ref'])
@@ -482,6 +511,7 @@ export default {
       for (let i = 0; i < results.length; i++) {
         // console.log('result loop', results[i])
         this.getMarker(results[i])
+        // this.getGeo(results[i])
       }
       this.$nuxt.$loading.finish()
 

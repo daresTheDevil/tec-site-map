@@ -66,7 +66,10 @@ export default {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {},
+  axios: {
+    proxyHeaders: false,
+    credentials: false
+  },
   env: {
     mapApiKey: process.env.GMAPS_API_KEY
   },

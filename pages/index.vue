@@ -24,7 +24,7 @@
           </div>
           <div class="ml-4">
             <h1 class="text-lg text-gray-100">
-              {{ codedProgress + uncodedProgress }}
+              {{ codedProgress.toFixed(0) + uncodedProgress.toFixed(0) }}%
             </h1>
           </div>
         </div>

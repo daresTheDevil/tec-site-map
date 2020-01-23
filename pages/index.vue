@@ -24,13 +24,13 @@
           </div>
           <div class="ml-4">
             <h1 class="text-lg text-gray-100">
-              {{ codedProgress.toFixed(0) + uncodedProgress.toFixed(0) }}%
+              {{ codedProgress + uncodedProgress }}%
             </h1>
           </div>
         </div>
 
         <div class="flex items-center">
-          <div
+          <!-- <div
             class="px-4 py-2 mr-4 text-gray-800 bg-teal-300 rounded-full"
             v-if="dataMarkers.length > 0"
           >
@@ -41,7 +41,7 @@
             v-if="uncodedMarkers.length > 0"
           >
             Uncoded: {{ uncodedMarkers.length }}
-          </div>
+          </div> -->
           <button
             class="inline-flex items-center px-4 py-2 font-bold text-gray-100 border-2 border-purple-100 rounded-lg hover:bg-purple-200 hover:text-purple-800 hover:border-purple-800"
             @click.stop="addFiles"
@@ -361,16 +361,17 @@ export default {
   computed: {
     codedProgress() {
       if (this.dataLength === 0) return 0
-      else return (this.dataMarkers.length / this.dataLength) * 100
+      else return Math.trunc((this.dataMarkers.length / this.dataLength) * 100)
     },
     uncodedProgress() {
       if (this.dataLength === 0) return 0
-      else return (this.uncodedMarkers.length / this.dataLength) * 100
+      else
+        return Math.trunc((this.uncodedMarkers.length / this.dataLength) * 100)
     },
     progress() {
       // const current = this.addedMarkers.length / this.dataLength
       // console.log('current', current)
-      return (this.dataMarkers.length / this.dataLength) * 100
+      return Math.trunc((this.dataMarkers.length / this.dataLength) * 100)
     },
     styleFunction() {
       // const fillColor = this.fillColor // important! need touch fillColor in computed for re-calculate when change fillColor

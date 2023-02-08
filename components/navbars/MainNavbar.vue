@@ -2,7 +2,7 @@
   <nav id="header" class="w-full z-30 top-0 text-gray-800 bg-purple-900 py-3">
     <div class="w-full  flex flex-wrap items-center justify-center mt-0">
       <div class="flex items-center">
-        <span class="text-4xl font-black tracking-tighter"><span class="font-thin">SITE</span>MAP</span>
+        <span class="text-white text-4xl font-black tracking-tighter"><span class="font-thin">SITE</span>MAP</span>
       </div>
 
       <!-- <div class="flex">

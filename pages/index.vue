@@ -6,7 +6,8 @@
     >
       <div class="flex flex-wrap items-center justify-between w-full px-8 mt-0">
         <div class="flex items-center">
-          <img src="tec-logo.svg" class="w-20 mr-4" />
+          <!-- <img src="tec-logo.svg" class="w-20 mr-4" /> -->
+          <span class="text-4xl font-black tracking-tighter"><span class="font-thin">SITE</span>MAP</span>
         </div>
 
         <div class="flex items-center" v-if="loading">

@@ -3,11 +3,6 @@
     <div class="w-full  flex flex-wrap items-center justify-center mt-0">
       <div class="flex items-center">
         <span class="text-4xl font-black tracking-tighter"><span class="font-thin">SITE</span>MAP</span>
-        <!-- <h1
-          class="text-3xl text-gray-100 no-underline font-medium tracking-tight hidden md:flex"
-        >
-          Unfulfilled Requests
-        </h1> -->
       </div>
 
       <!-- <div class="flex">

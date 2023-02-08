@@ -2,7 +2,7 @@
   <nav id="header" class="w-full z-30 top-0 text-gray-800 bg-purple-900 py-3">
     <div class="w-full  flex flex-wrap items-center justify-center mt-0">
       <div class="flex items-center">
-        <img src="tec-logo.svg" class="w-20 mr-4" />
+        <span class="text-4xl font-black tracking-tighter"><span class="font-thin">SITE</span>MAP</span>
         <!-- <h1
           class="text-3xl text-gray-100 no-underline font-medium tracking-tight hidden md:flex"
         >
